@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../../src/config/config.h
+string
+-
+memory
+-
+rapidjson/document.h
+../../../src/config/rapidjson/document.h
+rapidjson/filereadstream.h
+../../../src/config/rapidjson/filereadstream.h
+
+/home/gz/repository/workplace/ibn/test/unit_test/config_test.cpp
+gtest/gtest.h
+-
+config/config.h
+/home/gz/repository/workplace/ibn/test/unit_test/config/config.h
+

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gz/repository/workplace/ibn/test/json_test/json_test.cpp
+string
+-
+iostream
+-
+rapidjson/document.h
+/home/gz/repository/workplace/ibn/test/json_test/rapidjson/document.h
+rapidjson/filereadstream.h
+/home/gz/repository/workplace/ibn/test/json_test/rapidjson/filereadstream.h
+

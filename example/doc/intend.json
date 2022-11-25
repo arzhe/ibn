@@ -1,0 +1,25 @@
+{
+    "domain":{
+        "hello":"Please tell me which domain do you want to access.",
+        "perfectly_legal":"You are now in *.\nPlease tell me the connection you want to build.",
+        "partly_illegal":"Do you mean the following domain?",
+        "totally_illegal":"Sorry, I can't recognize your intention.\nPlease enter again the domain to access."
+    },
+    "subdomain":{
+        "success_true":"You are now in *.\nPlease tell me the connection you want to build.",
+        "success_false":"Sorry, I can't find the domain you specified.\nPlease enter again the domain to access",
+        "fail":"Sorry, I can't recognize your intention.\nPlease enter again the domain to access."
+    },
+    "netservice":{
+        "perfectly_legal":"You are asking for connection from * to #\nDo you have any bandwidth requirement?",
+        "partly_illegal":"Do you mean the following node?",
+        "totally_illegal":"Sorry, I can't recognize your intention.\nPlease enter again the nodes to connect.",
+        "multi_illegal":"Sorry, you can only build on connection at one time.\nPlease enter again the nodes to connect."
+    },
+    "subnetservice":{
+        "success_true":"You are asking for connection from * to #\nDo you have any bandwidth requirement?",
+        "success_false":"Sorry, I can't find the node you specified.\nPlease enter again the nodes to connect.",
+        "fail":"Sorry, I can't recognize your intention.\Please enter again the nodes to connect."
+    }
+}
+

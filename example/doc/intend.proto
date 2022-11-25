@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package intend;
+
+service Intend {
+    rpc IntendChat(stream Request) returns (stream Reply) {}
+}
+
+message Request {
+    string req = 1;
+}
+
+message Reply {
+    string rep = 1;
+}

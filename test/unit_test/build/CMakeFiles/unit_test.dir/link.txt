@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/unit_test.dir/config_test.cpp.o CMakeFiles/unit_test.dir/home/gz/repository/workplace/ibn/src/config/config.cpp.o  -o bin/unit_test  -lgtest -lgtest_main -lpthread 

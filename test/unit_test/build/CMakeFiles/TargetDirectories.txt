@@ -1,0 +1,4 @@
+/home/gz/repository/workplace/ibn/test/unit_test/build/CMakeFiles/rebuild_cache.dir
+/home/gz/repository/workplace/ibn/test/unit_test/build/CMakeFiles/edit_cache.dir
+/home/gz/repository/workplace/ibn/test/unit_test/build/CMakeFiles/test.dir
+/home/gz/repository/workplace/ibn/test/unit_test/build/CMakeFiles/unit_test.dir

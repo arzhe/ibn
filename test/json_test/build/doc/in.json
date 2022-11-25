@@ -1,0 +1,13 @@
+{
+    "domain":{
+        "perfectly_legal":"You are now in *.\nWhat kind of Net-Service do you want to do?",
+        "partly_illegal":"Do you mean the following domain?",
+        "totally_illegal":"Sorry, I can't recognize your intention.\nPlease enter again the domain to access."
+    },
+    "subdomain":{
+        "success_true":"You are now in *.\nWhat kind of Net-Service do you want to do?",
+        "success_false":"Sorry, I can't find the domain you specified.",
+        "fail":"Sorry, I can't recognize your intention.\nPlease enter again the domain to access."
+    }
+}
+

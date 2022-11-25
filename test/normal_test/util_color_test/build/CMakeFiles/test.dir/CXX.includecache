@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gz/repository/workplace/ibn/test/normal_test/util_color_test/test.cpp
+iostream
+-
+string
+-
+./util.h
+/home/gz/repository/workplace/ibn/test/normal_test/util_color_test/util.h
+
+/home/gz/repository/workplace/ibn/test/normal_test/util_color_test/util.h
+string
+-
+vector
+-
+algorithm
+-
+

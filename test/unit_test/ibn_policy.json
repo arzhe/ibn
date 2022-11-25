@@ -1,0 +1,50 @@
+{
+    "domain":[
+        {
+            "name":"demo",
+            "description":"This domain is for demonstration",
+            "bandwidth":"50Gb/s",
+            "topology":[
+                {
+                    "path":"1,2,3"
+                },
+                {
+                    "path":"1,3"
+                }
+            ]
+        },
+        {
+            "name":"test",
+            "description":"This domain is for testing",
+            "bandwidth":"20Gb/s",
+            "topology":[
+                {
+                    "path":"0,11,22"
+                },
+                {
+                    "path":"0,22"
+                }
+            ]
+        }
+    ],
+    "node":[
+        {
+            "id":0,
+            "description":"This is the node 0, only for testing",
+            "name":"user",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":1,
+            "description":"node 1",
+            "name":"Wuhan",
+            "ip":"1.1.1.1/24"
+        },
+        {
+            "id":2,
+            "description":"node 2",
+            "name":"Guangdong",
+            "ip":"2.2.2.2/24"
+        }
+    ]
+}
