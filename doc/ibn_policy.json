@@ -1,0 +1,124 @@
+{
+    "domain":[
+        {
+            "name":"demo",
+            "description":"This domain is for demonstration",
+            "bandwidth":"50Gb/s",
+            "topology":[
+                {
+                    "path":"1,2"
+                }
+            ]
+        },
+        {
+            "name":"test-0",
+            "description":"This domain is for testing",
+            "bandwidth":"20Gb/s",
+            "topology":[
+                {
+                    "path":"1,11,22"
+                },
+                {
+                    "path":"2,22"
+                },
+                {
+                    "path":"1,2"
+                }
+            ]
+        },
+        {
+            "name":"test-1",
+            "description":"This domain is for testing",
+            "bandwidth":"20Gb/s",
+            "topology":[
+                {
+                    "path":"11,22"
+                },
+                {
+                    "path":"1,11,12,2,21,22"
+                }
+            ]
+        },
+        {
+            "name":"test-2",
+            "description":"This domain is for testing",
+            "bandwidth":"20Gb/s",
+            "topology":[
+                {
+                    "path":"11,22"
+                },
+                {
+                    "path":"1,11"
+                }
+            ]
+        },
+        {
+            "name":"tesla",
+            "description":"This domain is for testing",
+            "bandwidth":"20Gb/s",
+            "topology":[
+                {
+                    "path":"1,11,12"
+                },
+                {
+                    "path":"2,21,22"
+                }
+            ]
+        }
+    ],
+    "node":[
+        {
+            "id":0,
+            "description":"This is the node 0, only for testing",
+            "name":"user",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":1,
+            "description":"node 1",
+            "name":"Hubei",
+            "ip":"1.1.1.1/24"
+        },
+        {
+            "id":2,
+            "description":"node 2",
+            "name":"Guangzhou",
+            "ip":"2.2.2.2/24"
+        },
+        {
+            "id":11,
+            "description":"This is the node 11, only for testing",
+            "name":"Wuhan",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":12,
+            "description":"This is the node 12, only for testing",
+            "name":"Xiaogan",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":13,
+            "description":"This is the node 13, only for testing",
+            "name":"Wuchang",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":14,
+            "description":"This is the node 14, only for testing",
+            "name":"Hankou",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":21,
+            "description":"This is the node 21, only for testing",
+            "name":"Guangdong",
+            "ip":"0.0.0.0/32"
+        },
+        {
+            "id":22,
+            "name":"shenzhen",
+            "ip":"0.0.0.0/32"
+        }
+    ]
+}

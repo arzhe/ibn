@@ -27,7 +27,7 @@ public:
         (void) context;
         Request request;
         Reply reply;
-        auto fsm = ibn::Fsm::NewFsmFromFile("./ibn_policy.json");
+        auto fsm = ibn::Fsm::NewFsmFromFile("../../doc/ibn_policy.json");
         while(1) {
             auto content = fsm->GetReply();
             reply.set_rep(content);

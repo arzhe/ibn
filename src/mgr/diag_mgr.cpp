@@ -3,7 +3,7 @@
 
 namespace ibn {
 
-const std::string DiagMgr::path_ = "./doc/intend.json";
+const std::string DiagMgr::path_ = "../../doc/intend.json";
 
 std::shared_ptr<DiagMgr> DiagMgr::NewDiagMgr() {
     auto dmg = std::make_shared<DiagMgr>();

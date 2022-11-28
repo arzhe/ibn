@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/protoc.dir/__/src/google/protobuf/compiler/main.cc.o  -o protoc  libprotobuf.a libprotoc.a libprotobuf.a -lpthread 
