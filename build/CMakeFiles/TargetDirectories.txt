@@ -1,6 +1,0 @@
-/home/gz/repository/workplace/ibn/build/CMakeFiles/rebuild_cache.dir
-/home/gz/repository/workplace/ibn/build/CMakeFiles/edit_cache.dir
-/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/rebuild_cache.dir
-/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/edit_cache.dir
-/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/intend_server.dir
-/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/intend_client.dir
