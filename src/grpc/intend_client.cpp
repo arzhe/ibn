@@ -29,7 +29,8 @@ public:
         ClientContext context;
         std::shared_ptr<ClientReaderWriter<Request, Reply>> stream(stub_->IntendChat(&context));
 
-        std::cout << "\033[32mIBN>\033[0mHello and welcome to IBN!" << std::endl;
+        std::cout << ibn::ColorString<GREEN>("<IBN>") << "Hello and welcome to IBN!" << std::endl;
+        std::cout << ibn::ColorString<BLUE>("<IBN>") << "Please tell me which domain you want to access." << std::endl;
         /* std::thread writer([stream]() { */
         /*     std::string cmd; */
         /*     Request request; */
@@ -52,8 +53,10 @@ public:
         /* }); */
 
         Reply reply;
-        while(stream->Read(&reply)) {
-            std::cout << reply.rep() << std::endl;
+        do {
+            if(reply.rep() != "") {
+                std::cout << reply.rep() << std::endl;
+            }
             std::cout << ibn::ColorString<GREEN>("<User>");
             // std::cout << "\033[32mUser>\033[0m";
             std::string cmd;
@@ -64,7 +67,22 @@ public:
             if(!stream->Write(request)) {
                 continue;
             }
-        }
+        } while(stream->Read(&reply));
+
+        /* Reply reply; */
+        /* while(stream->Read(&reply)) { */
+        /*     std::cout << reply.rep() << std::endl; */
+        /*     std::cout << ibn::ColorString<GREEN>("<User>"); */
+        /*     // std::cout << "\033[32mUser>\033[0m"; */
+        /*     std::string cmd; */
+        /*     Request request; */
+        /*     if(std::getline(std::cin, cmd, '\n')) { */
+        /*         request.set_req(cmd); */
+        /*     } */
+        /*     if(!stream->Write(request)) { */
+        /*         continue; */
+        /*     } */
+        /* } */
 
         //writer.join();
         Status status = stream->Finish();
@@ -86,4 +104,82 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+/* #include <iostream> */
+/* #include <memory> */
+/* #include <string> */
 
+/* #include <grpcpp/grpcpp.h> */
+/* #include <grpc/support/log.h> */
+
+/* #include "parse/fsm.h" */
+/* #include "proto/intend.grpc.pb.h" */
+/* #include "base/util/util.h" */
+
+/* using grpc::Channel; */
+/* using grpc::ClientAsyncReaderWriter; */
+/* using grpc::ClientContext; */
+/* using grpc::CompletionQueue; */
+/* using grpc::Status; */
+/* using intend::Request; */
+/* using intend::Reply; */
+/* using intend::Intend; */
+
+/* class IntendClient { */
+/* public: */
+/*     explicit IntendClient(std::shared_ptr<Channel> channel) */
+/*         : stub_(Intend::NewStub(channel)) {} */
+
+/*     std::string IntendChat(const std::string& cmd) { */
+/*         Request request; */
+/*         request.set_req(cmd); */
+
+/*         Reply reply; */
+
+/*         ClientContext context; */
+
+/*         CompletionQueue cq; */
+
+/*         Status status; */
+
+/*         std::unique_ptr<ClientAsyncReaderWriter<Request, Reply>> rpc( */
+/*             stub_->PrepareAsyncIntendChat(&context, request, &cq)); */
+
+/*         rpc->StartCall(); */
+
+/*         rpc->Finish(&reply, &status, (void*)1); */
+/*         void* got_tag; */
+/*         bool ok = false; */
+
+/*         GPR_ASSERT(cq.Next(&got_tag, &ok)); */
+/*         GPR_ASSERT(got_tag == (void*)1); */
+/*         GPR_ASSERT(ok); */
+
+/*         if(status.ok()) { */
+/*             return reply.rep(); */
+/*         } */
+/*         else { */
+/*             return "RPC failed"; */
+/*         } */
+/*     } */
+
+/* private: */
+/*     std::unique_ptr<Intend::Stub> stub_; */
+/* }; */
+
+/* int main(int argc, char** argv) { */
+/*     std::string address(argv[1]); */
+/*     IntendClient intend(grpc::CreateChannel( */
+/*         address, grpc::InsecureChannelCredentials())); */
+
+/*     std::cout << "\033[32mIBN>\033[0mHello and welcome to IBN!" << std::endl; */
+/*     std::cout << ibn::ColorString<BLUE>("<IBN>") << "Please tell me which domain you want to access." << std::endl; */
+/*     std::cout << ibn::ColorString<GREEN>("<User>"); */
+/*     std::string cmd; */
+/*     while(std::getline(std::cin, cmd, '\n')) { */
+/*         std::string reply = intend.IntendChat(cmd); */
+/*         std::cout << reply << std::endl; */
+/*         std::cout << ibn::ColorString<GREEN>("<User>"); */
+/*     } */
+    
+/*     return 0; */
+/* } */
