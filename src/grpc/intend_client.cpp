@@ -97,7 +97,14 @@ private:
 };
 
 int main(int argc, char** argv) {
-    IntendClient intend(grpc::CreateChannel("localhost:8888", grpc::InsecureChannelCredentials()));
+    std::string server_address;
+    if(argc != 1) {
+        server_address = argv[1];
+    }
+    else {
+        server_address = "localhost:8888";
+    }
+    IntendClient intend(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()));
 
     intend.IntendChat();
 

@@ -59,7 +59,13 @@ public:
 };
 
 int main(int argc, char** argv) {
-    std::string server_address("0.0.0.0:8888");
+    std::string server_address;
+    if(argc != 1) {
+        server_address = argv[1];
+    }
+    else {
+        server_address = "0.0.0.0:8888";
+    }
     IntendImpl service;
     
     ServerBuilder builder;

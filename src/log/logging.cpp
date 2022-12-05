@@ -1,5 +1,6 @@
 #include "log/logging.h"
 #include "log/timestamp.h"
+#include "base/common/current_thread.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -113,8 +114,8 @@ Logger::Impl::Impl(LogLevel level, int savedErrno, const SourceFile& file, int l
       line_(line),
       basename_(file) {
     formatTime();
-    // CurrentThread::tid();
-    // stream_ << T(CurrentThread::tidString(), CurrentThread::tidStringLength());
+    CurrentThread::Tid();
+    stream_ << T(CurrentThread::TidString(), CurrentThread::TidStringLength());
     stream_ << T(LogLevelName[level], 6);
     if(savedErrno != 0) {
         stream_ << strerror_tl(savedErrno) << " (errno=" << savedErrno << ") ";

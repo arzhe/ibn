@@ -57,6 +57,7 @@ namespace ibn {
 #define CYAN   6
 #define WHITE  7
 
+// Render font color.
 template<typename T>
 std::string ColorString(const std::string& str) { return ""; }
 
@@ -87,30 +88,55 @@ std::string ColorString(const std::string& str) {
 
 class IbnUtil {
 public:
+    // Alias for algorithm of distance.
     using DIS = double (*)(String, String);
 
+    /*--------------------------------------------------------------------------------
+     * Cropp the WHITESPACE or OTHER DELIM on both sides of the string.
+     */ 
     static String RTrim(const String& str, const String& delim = IbnUtil::WHITESPACE);
 
     static String LTrim(const String& str, const String& delim = IbnUtil::WHITESPACE);
 
     static String Trim(const String& str, const String& delim = IbnUtil::WHITESPACE);
 
+    /*--------------------------------------------------------------------------------
+     * Ignore case-sensitive comparisons between two strings.
+     */ 
     static bool IgnoreCaseCompare(const String& a, const String& b);
 
+    /*--------------------------------------------------------------------------------
+     * Transfer the string to lower-case string.
+     */ 
     static String ToLowerString(String str);
 
+    /*--------------------------------------------------------------------------------
+     * The algorithm of distance.
+     * And the "Similarity" of two characters is calculated according to the distance algorithm.
+     * By default, the JaroWinklerDistance algorithm is used.
+     */ 
     static double JaroWinklerDistance(String a, String b);
     
     static double DamerauLevenshteinDistance(String a, String b);
 
     static double Similarity(String a, String b, DIS dis = &IbnUtil::JaroWinklerDistance);
  
+    /*--------------------------------------------------------------------------------
+     * Divides the string into "limit" substrings based on "delim".
+     * By default , the "limit" number is set to zero.
+     */ 
     static StringList Split(String str, const String& delim, int limit = 0);
 
+    /*--------------------------------------------------------------------------------
+     * Determines if the string is logically true or false.
+     * As for, "yes", "NO" and etc.
+     */
     static bool LogicTrue(String str);
-
     static bool LogicFalse(String str);
 
+    /*--------------------------------------------------------------------------------
+     * Determines if the string is a number.
+     */ 
     static bool IsNum(String str);
 
 private:
