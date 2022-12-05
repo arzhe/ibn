@@ -115,7 +115,7 @@ Logger::Impl::Impl(LogLevel level, int savedErrno, const SourceFile& file, int l
       basename_(file) {
     formatTime();
     CurrentThread::Tid();
-    stream_ << T(CurrentThread::TidString(), CurrentThread::TidStringLength());
+    stream_ << T(CurrentThread::TidString(), CurrentThread::TidStringLength()) << T(" ", 1);
     stream_ << T(LogLevelName[level], 6);
     if(savedErrno != 0) {
         stream_ << strerror_tl(savedErrno) << " (errno=" << savedErrno << ") ";
