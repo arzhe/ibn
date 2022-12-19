@@ -51,15 +51,15 @@ public:
     Logger(SourceFile file, int line, bool toAbort);
     ~Logger();
 
-    LogStream& stream() { return impl_.stream_; }
+    LogStream& Stream() { return impl_.stream_; }
 
-    static LogLevel logLevel();
-    static void setLogLevel(LogLevel level);
+    static LogLevel GetLogLevel();
+    static void SetLogLevel(LogLevel level);
 
     typedef void (*OutputFunc)(const char* msg, int len);
     typedef void (*FlushFunc)();
-    static void setOutput(OutputFunc);
-    static void setFlush(FlushFunc);
+    static void SetOutput(OutputFunc);
+    static void SetFlush(FlushFunc);
 
 private:
 
@@ -67,8 +67,8 @@ private:
     public:
         typedef Logger::LogLevel LogLevel;
         Impl(LogLevel level, int old_errno, const SourceFile& file, int line);
-        void formatTime();
-        void finish();
+        void FormatTime();
+        void Finish();
 
         Timestamp time_;
         LogStream stream_;
@@ -83,7 +83,7 @@ private:
 
 extern Logger::LogLevel g_logLevel;
 
-inline Logger::LogLevel Logger::logLevel() {
+inline Logger::LogLevel Logger::GetLogLevel() {
     return g_logLevel;
 }
 
@@ -103,17 +103,17 @@ inline Logger::LogLevel Logger::logLevel() {
 //   else
 //     logWarnStream << "Bad news";
 //
-#define LOG_TRACE if (ibn::Logger::logLevel() <= ibn::Logger::TRACE) \
-    ibn::Logger(__FILE__, __LINE__, ibn::Logger::TRACE, __func__).stream()
-#define LOG_DEBUG if (ibn::Logger::logLevel() <= ibn::Logger::DEBUG) \
-    ibn::Logger(__FILE__, __LINE__, ibn::Logger::DEBUG, __func__).stream()
-#define LOG_INFO if (ibn::Logger::logLevel() <= ibn::Logger::INFO) \
-    ibn::Logger(__FILE__, __LINE__).stream()
-#define LOG_WARN ibn::Logger(__FILE__, __LINE__, ibn::Logger::WARN).stream()
-#define LOG_ERROR ibn::Logger(__FILE__, __LINE__, ibn::Logger::ERROR).stream()
-#define LOG_FATAL ibn::Logger(__FILE__, __LINE__, ibn::Logger::FATAL).stream()
-#define LOG_SYSERR ibn::Logger(__FILE__, __LINE__, false).stream()
-#define LOG_SYSFATAL ibn::Logger(__FILE__, __LINE__, true).stream()
+#define LOG_TRACE if (ibn::Logger::GetLogLevel() <= ibn::Logger::TRACE) \
+    ibn::Logger(__FILE__, __LINE__, ibn::Logger::TRACE, __func__).Stream()
+#define LOG_DEBUG if (ibn::Logger::GetLogLevel() <= ibn::Logger::DEBUG) \
+    ibn::Logger(__FILE__, __LINE__, ibn::Logger::DEBUG, __func__).Stream()
+#define LOG_INFO if (ibn::Logger::GetLogLevel() <= ibn::Logger::INFO) \
+    ibn::Logger(__FILE__, __LINE__).Stream()
+#define LOG_WARN ibn::Logger(__FILE__, __LINE__, ibn::Logger::WARN).Stream()
+#define LOG_ERROR ibn::Logger(__FILE__, __LINE__, ibn::Logger::ERROR).Stream()
+#define LOG_FATAL ibn::Logger(__FILE__, __LINE__, ibn::Logger::FATAL).Stream()
+#define LOG_SYSERR ibn::Logger(__FILE__, __LINE__, false).Stream()
+#define LOG_SYSFATAL ibn::Logger(__FILE__, __LINE__, true).Stream()
 
 const char* strerror_tl(int savedErrno);
 
@@ -129,7 +129,7 @@ const char* strerror_tl(int savedErrno);
 template <typename T>
 T* CheckNotNull(Logger::SourceFile file, int line, const char *names, T* ptr) {
     if(ptr == NULL) {
-        Logger(file, line, Logger::FATAL).stream() << names;
+        Logger(file, line, Logger::FATAL).Stream() << names;
     }
     return ptr;
 }

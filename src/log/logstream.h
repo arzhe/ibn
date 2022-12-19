@@ -30,33 +30,33 @@ public:
         // setCookie(cookieEnd);
     }
 
-    void append(const char* /*restrict*/ buf, size_t len) {
-        if (implicit_cast<size_t>(avail()) > len) {
+    void Append(const char* /*restrict*/ buf, size_t len) {
+        if (implicit_cast<size_t>(Avail()) > len) {
             memcpy(cur_, buf, len);
             cur_ += len;
         }
     }
 
-    const char* data() const { return data_; }
-    int length() const { return static_cast<int>(cur_ - data_); }
+    const char* Data() const { return data_; }
+    int Length() const { return static_cast<int>(cur_ - data_); }
 
     // write to data_ directly
-    char* current() { return cur_; }
-    int avail() const { return static_cast<int>(end() - cur_); }
-    void add(size_t len) { cur_ += len; }
+    char* Current() { return cur_; }
+    int Avail() const { return static_cast<int>(End() - cur_); }
+    void Add(size_t len) { cur_ += len; }
 
-    void reset() { cur_ = data_; }
-    void bzero() { memZero(data_, sizeof data_); }
+    void Reset() { cur_ = data_; }
+    void Bzero() { memzero(data_, sizeof data_); }
 
     // for used by GDB
-    const char* debugString();
+    const char* DebugString();
     // void setCookie(void (*cookie)()) { cookie_ = cookie; }
     // for used by unit test
-    string toString() const { return string(data_, length()); }
-    StringView toStringView() const { return StringView(data_, length()); }
+    string ToString() const { return string(data_, Length()); }
+    StringView ToStringView() const { return StringView(data_, Length()); }
 
 private:
-    const char* end() const { return data_ + sizeof data_; }
+    const char* End() const { return data_ + sizeof data_; }
     // Must be outline function for cookies.
     // static void cookieStart();
     // static void cookieEnd();
@@ -75,7 +75,7 @@ public:
     typedef detail::FixedBuffer<detail::kSmallBuffer> Buffer;
 
     self& operator<<(bool v) {
-        buffer_.append(v ? "1" : "0", 1);
+        buffer_.Append(v ? "1" : "0", 1);
         return *this;
     }
 
@@ -98,7 +98,7 @@ public:
     // self& operator<<(long double);
 
     self& operator<<(char v) {
-        buffer_.append(&v, 1);
+        buffer_.Append(&v, 1);
         return *this;
     }
 
@@ -107,10 +107,10 @@ public:
 
     self& operator<<(const char* str) {
         if(str) {
-            buffer_.append(str, strlen(str));
+            buffer_.Append(str, strlen(str));
         }
         else {
-            buffer_.append("(null)", 6);
+            buffer_.Append("(null)", 6);
         }
         return *this;
     }
@@ -120,29 +120,29 @@ public:
     }
 
     self& operator<<(const string& v) {
-        buffer_.append(v.c_str(), v.size());
+        buffer_.Append(v.c_str(), v.size());
         return *this;
     }
 
     self& operator<<(const StringView& v) {
-        buffer_.append(v.data(), v.size());
+        buffer_.Append(v.data(), v.size());
         return *this;
     }
 
     self& operator<<(const Buffer& v) {
-        *this << v.toStringView();
+        *this << v.ToStringView();
         return *this;
     }
 
-    void append(const char* data, int len) { buffer_.append(data, len); }
-    const Buffer& buffer() const { return buffer_; }
-    void resetBuffer() { buffer_.reset(); }
+    void Append(const char* data, int len) { buffer_.Append(data, len); }
+    const Buffer& GetBuffer() const { return buffer_; }
+    void ResetBuffer() { buffer_.Reset(); }
 
 private:
-    void staticCheck();
+    void StaticCheck();
 
     template<typename T>
-    void formatInteger(T);
+    void FormatInteger(T);
 
     Buffer buffer_;
 
@@ -154,8 +154,8 @@ public:
     template<typename T>
     Fmt(const char* fmt, T val);
 
-    const char* data() const { return buf_; }
-    int length() const { return length_; }
+    const char* Data() const { return buf_; }
+    int Length() const { return length_; }
 
 private:
     char buf_[32];
@@ -165,7 +165,7 @@ private:
 
 inline LogStream& operator<<(LogStream& s, const Fmt& fmt)
 {
-    s.append(fmt.data(), fmt.length());
+    s.Append(fmt.Data(), fmt.Length());
     return s;
 }
 

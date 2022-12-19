@@ -36,7 +36,7 @@ const char* strerror_tl(int savedErrno) {
     return strerror_r(savedErrno, t_errnobuf, sizeof t_errnobuf);
 }
 
-Logger::LogLevel initLogLevel() {
+Logger::LogLevel InitLogLevel() {
     auto option = Logger::INFO;
 #ifdef IBN_LOG_TRACE
     option = Logger::TRACE;
@@ -55,7 +55,7 @@ Logger::LogLevel initLogLevel() {
     /*     return Logger::INFO; */
 }
 
-Logger::LogLevel g_logLevel = initLogLevel();
+Logger::LogLevel g_logLevel = InitLogLevel();
 
 const char* LogLevelName[Logger::NUM_LOG_LEVELS] =
 {
@@ -81,39 +81,39 @@ public:
 };
 
 inline LogStream& operator<<(LogStream& s, T v) {
-    s.append(v.str_, v.len_);
+    s.Append(v.str_, v.len_);
     return s;
 }
 
 inline LogStream& operator<<(LogStream& s, const Logger::SourceFile& v) {
-    s.append(v.data_, v.size_);
+    s.Append(v.data_, v.size_);
     return s;
 }
 
-void defaultOutput(const char* msg, int len) {
+void DefaultOutput(const char* msg, int len) {
     size_t n = fwrite(msg, 1, len, stdout);
     //FIXME check n
     (void)n;
 }
 
-void defaultFlush() {
+void DefaultFlush() {
     fflush(stdout);
 }
 
-Logger::OutputFunc g_output = defaultOutput;
-Logger::FlushFunc g_flush = defaultFlush;
+Logger::OutputFunc g_output = DefaultOutput;
+Logger::FlushFunc g_flush = DefaultFlush;
 
 } // !namespace ibn
 
 using namespace ibn;
 
 Logger::Impl::Impl(LogLevel level, int savedErrno, const SourceFile& file, int line)
-    : time_(Timestamp::now()),
+    : time_(Timestamp::Now()),
       stream_(),
       level_(level),
       line_(line),
       basename_(file) {
-    formatTime();
+    FormatTime();
     CurrentThread::Tid();
     stream_ << T(CurrentThread::TidString(), CurrentThread::TidStringLength()) << T(" ", 1);
     stream_ << T(LogLevelName[level], 6);
@@ -122,8 +122,8 @@ Logger::Impl::Impl(LogLevel level, int savedErrno, const SourceFile& file, int l
     }
 }
 
-void Logger::Impl::formatTime() {
-    int64_t microSecondsSinceEpoch = time_.microSecondsSinceEpoch();
+void Logger::Impl::FormatTime() {
+    int64_t microSecondsSinceEpoch = time_.MicroSecondsSinceEpoch();
     time_t seconds = static_cast<time_t>(microSecondsSinceEpoch / Timestamp::kMicroSecondsPerSecond);
     int microseconds = static_cast<int>(microSecondsSinceEpoch % Timestamp::kMicroSecondsPerSecond);
     if(seconds != t_lastSecond) {
@@ -138,11 +138,11 @@ void Logger::Impl::formatTime() {
     }
 
     Fmt us(".%06dZ ", microseconds);
-    assert(us.length() == 9);
-    stream_ << T(t_time, 17) << T(us.data(), 9);
+    assert(us.Length() == 9);
+    stream_ << T(t_time, 17) << T(us.Data(), 9);
 }
 
-void Logger::Impl::finish() {
+void Logger::Impl::Finish() {
     stream_ << " - " << basename_ << ':' << line_ << '\n';
 }
 
@@ -161,23 +161,23 @@ Logger::Logger(SourceFile file, int line, bool toAbort)
     : impl_(toAbort?FATAL:ERROR, errno, file, line) {}
 
 Logger::~Logger() {
-    impl_.finish();
-    const LogStream::Buffer& buf(stream().buffer());
-    g_output(buf.data(), buf.length());
+    impl_.Finish();
+    const LogStream::Buffer& buf(Stream().GetBuffer());
+    g_output(buf.Data(), buf.Length());
     if(impl_.level_ == FATAL) {
         g_flush();
         abort();
     }
 }
 
-void Logger::setLogLevel(Logger::LogLevel level) {
+void Logger::SetLogLevel(Logger::LogLevel level) {
     g_logLevel = level;
 }
 
-void Logger::setOutput(OutputFunc out) {
+void Logger::SetOutput(OutputFunc out) {
     g_output = out;
 }
 
-void Logger::setFlush(FlushFunc flush) {
+void Logger::SetFlush(FlushFunc flush) {
     g_flush = flush;
 }

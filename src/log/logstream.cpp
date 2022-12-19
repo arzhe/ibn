@@ -65,7 +65,7 @@ size_t convert(char buf[], T value) {
 /* template<int SIZE> */
 /* void FixedBuffer<SIZE>::cookieEnd() {} */
 
-void LogStream::staticCheck() {
+void LogStream::StaticCheck() {
     static_assert(kMaxNumericSize - 10 > std::numeric_limits<double>::digits10,
                  "kMaxNumericSize is large enough");
     static_assert(kMaxNumericSize - 10 > std::numeric_limits<long double>::digits10,
@@ -77,10 +77,10 @@ void LogStream::staticCheck() {
 }
 
 template<typename T>
-void LogStream::formatInteger(T v) {
-    if(buffer_.avail() >= kMaxNumericSize) {
-        size_t len = convert(buffer_.current(), v);
-        buffer_.add(len);
+void LogStream::FormatInteger(T v) {
+    if(buffer_.Avail() >= kMaxNumericSize) {
+        size_t len = convert(buffer_.Current(), v);
+        buffer_.Add(len);
     }
 }
 
@@ -95,32 +95,32 @@ LogStream& LogStream::operator<<(unsigned short v) {
 }
 
 LogStream& LogStream::operator<<(int v) {
-    formatInteger(v);
+    FormatInteger(v);
     return *this;
 }
 
 LogStream& LogStream::operator<<(unsigned int v) {
-    formatInteger(v);
+    FormatInteger(v);
     return *this;
 }
 
 LogStream& LogStream::operator<<(long v) {
-    formatInteger(v);
+    FormatInteger(v);
     return *this;
 }
 
 LogStream& LogStream::operator<<(unsigned long v) {
-    formatInteger(v);
+    FormatInteger(v);
     return *this;
 }
 
 LogStream& LogStream::operator<<(long long v) {
-    formatInteger(v);
+    FormatInteger(v);
     return *this;
 }
 
 LogStream& LogStream::operator<<(unsigned long long v) {
-    formatInteger(v);
+    FormatInteger(v);
     return *this;
 }
 
@@ -137,9 +137,9 @@ LogStream& LogStream::operator<<(const void* p) {
 }
 
 LogStream& LogStream::operator<<(double v) {
-    if(buffer_.avail() >= kMaxNumericSize) {
-        int len = snprintf(buffer_.current(), kMaxNumericSize, "%.12g", v);
-        buffer_.add(len);
+    if(buffer_.Avail() >= kMaxNumericSize) {
+        int len = snprintf(buffer_.Current(), kMaxNumericSize, "%.12g", v);
+        buffer_.Add(len);
     }
     return *this;
 }

@@ -16,7 +16,7 @@ using namespace ibn;
 static_assert(sizeof(Timestamp) == sizeof(int64_t),
               "Timestamp should be same size as int64_t");
 
-string Timestamp::toString() const {
+string Timestamp::ToString() const {
     char buf[32] = {0};
     int64_t seconds = microseconds_since_epoch_ / kMicroSecondsPerSecond;
     int64_t microseconds = microseconds_since_epoch_ % kMicroSecondsPerSecond;
@@ -24,7 +24,7 @@ string Timestamp::toString() const {
     return buf;
 }
 
-string Timestamp::toFormattedString(bool show_microseconds) const {
+string Timestamp::ToFormattedString(bool show_microseconds) const {
     char buf[64] = {0};
     time_t seconds = static_cast<time_t>(microseconds_since_epoch_ / kMicroSecondsPerSecond);
     struct tm tm_time;
@@ -45,7 +45,7 @@ string Timestamp::toFormattedString(bool show_microseconds) const {
     return buf;
 }
 
-Timestamp Timestamp::now() {
+Timestamp Timestamp::Now() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
     int64_t seconds = tv.tv_sec;

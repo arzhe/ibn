@@ -108,27 +108,27 @@ public:
     STRINGVIEW_BINARY_PREDICATE(>,  >);
 #undef STRINGVIEW_BINARY_PREDICATE
 
-int compare(const StringView& x) const {
-    int r = memcmp(ptr_, x.ptr_, length_ < x.length_ ? length_ : x.length_);
-    if(r == 0) {
-        if (length_ < x.length_) r = -1;
-        else if (length_ > x.length_) r = +1;
+    int compare(const StringView& x) const {
+        int r = memcmp(ptr_, x.ptr_, length_ < x.length_ ? length_ : x.length_);
+        if(r == 0) {
+            if (length_ < x.length_) r = -1;
+            else if (length_ > x.length_) r = +1;
+        }
+        return r;
     }
-    return r;
-}
 
-string as_string() const {
-    return string(data(), size());
-}
+    string as_string() const {
+        return string(data(), size());
+    }
 
-void CopyToString(string* target) const {
-    target->assign(ptr_, length_);
-}
+    void copy_to_string(string* target) const {
+        target->assign(ptr_, length_);
+    }
 
-// Does "this" start with "x"
-bool starts_with(const StringView& x) const {
-    return ((length_ >= x.length_) && (memcmp(ptr_, x.ptr_, x.length_) == 0));
-}
+    // Does "this" start with "x"
+    bool starts_with(const StringView& x) const {
+        return ((length_ >= x.length_) && (memcmp(ptr_, x.ptr_, x.length_) == 0));
+    }
 
 };
 

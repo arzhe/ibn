@@ -25,36 +25,36 @@ public:
     explicit Timestamp(int64_t microSecondsSinceEpochArg)
         : microseconds_since_epoch_(microSecondsSinceEpochArg) {}
 
-    void swap(Timestamp& that) {
+    void Swap(Timestamp& that) {
         std::swap(microseconds_since_epoch_, that.microseconds_since_epoch_);
     }
 
     // default copy/assignment/dtor are Okay
 
-    string toString() const;
-    string toFormattedString(bool show_microseconds = true) const;
+    string ToString() const;
+    string ToFormattedString(bool show_microseconds = true) const;
 
-    bool valid() const { return microseconds_since_epoch_ > 0; }
+    bool Valid() const { return microseconds_since_epoch_ > 0; }
 
     // for internal usage.
-    int64_t microSecondsSinceEpoch() const {
+    int64_t MicroSecondsSinceEpoch() const {
         return microseconds_since_epoch_; 
     }
-    time_t secondsSinceEpoch() const { 
+    time_t SecondsSinceEpoch() const { 
         return static_cast<time_t>(microseconds_since_epoch_ / kMicroSecondsPerSecond); 
     }
 
     // Get time of now.
-    static Timestamp now();
-    static Timestamp invalid() {
+    static Timestamp Now();
+    static Timestamp Invalid() {
         return Timestamp();
     }
 
-    static Timestamp fromUnixTime(time_t t) {
-        return fromUnixTime(t, 0);
+    static Timestamp FromUnixTime(time_t t) {
+        return FromUnixTime(t, 0);
     }
 
-    static Timestamp fromUnixTime(time_t t, int microseconds) {
+    static Timestamp FromUnixTime(time_t t, int microseconds) {
         return Timestamp(static_cast<int64_t>(t) * kMicroSecondsPerSecond + microseconds);
     }
 
@@ -67,12 +67,12 @@ private:
 
 inline bool operator<(Timestamp lhs, Timestamp rhs)
 {
-    return lhs.microSecondsSinceEpoch() < rhs.microSecondsSinceEpoch();
+    return lhs.MicroSecondsSinceEpoch() < rhs.MicroSecondsSinceEpoch();
 }
 
 inline bool operator==(Timestamp lhs, Timestamp rhs)
 {
-    return lhs.microSecondsSinceEpoch() == rhs.microSecondsSinceEpoch();
+    return lhs.MicroSecondsSinceEpoch() == rhs.MicroSecondsSinceEpoch();
 }
 
 ///
@@ -84,7 +84,7 @@ inline bool operator==(Timestamp lhs, Timestamp rhs)
 /// resolution for next 100 years.
 inline double timeDifference(Timestamp high, Timestamp low)
 {
-    int64_t diff = high.microSecondsSinceEpoch() - low.microSecondsSinceEpoch();
+    int64_t diff = high.MicroSecondsSinceEpoch() - low.MicroSecondsSinceEpoch();
     return static_cast<double>(diff) / Timestamp::kMicroSecondsPerSecond;
 }
 
@@ -96,7 +96,7 @@ inline double timeDifference(Timestamp high, Timestamp low)
 inline Timestamp addTime(Timestamp timestamp, double seconds)
 {
     int64_t delta = static_cast<int64_t>(seconds * Timestamp::kMicroSecondsPerSecond);
-    return Timestamp(timestamp.microSecondsSinceEpoch() + delta);
+    return Timestamp(timestamp.MicroSecondsSinceEpoch() + delta);
 }
 
 

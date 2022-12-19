@@ -35,7 +35,9 @@ inline const char* Name() {
 
 bool IsMainThread();
 
-} // !namespace ibn
+std::string StackTrace(bool demangle);
+
+} // !namespace CurrentThread
 
 } // !namespace ibn
 

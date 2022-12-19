@@ -17,7 +17,7 @@ namespace ibn
 
 using std::string;
 
-inline void memZero(void* p, size_t n)
+inline void memzero(void* p, size_t n)
 {
     memset(p, 0, n);
 }
