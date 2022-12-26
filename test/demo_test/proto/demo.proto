@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package demo;
+
+service Diag {
+    rpc Chat(stream Request) returns (stream Reply) {}
+}
+
+service INT {
+    rpc Collect(stream Feedback) returns (stream Issue) {}
+}
+
+message Request {
+    string req = 1;
+}
+
+message Reply {
+    string rep = 1;
+}
+
+message Feedback {
+    int count = 1;
+}
+
+message Issue {
+    bool update;
+}

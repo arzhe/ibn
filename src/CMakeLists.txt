@@ -83,7 +83,7 @@
 #endif()
 
 # Proto file
-get_filename_component(hw_proto "${CMAKE_SOURCE_DIR}/example/doc/intend.proto" ABSOLUTE)
+get_filename_component(hw_proto "${CMAKE_SOURCE_DIR}/doc/intend.proto" ABSOLUTE)
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
 
 # Generated sources
