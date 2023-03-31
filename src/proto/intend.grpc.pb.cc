@@ -17,6 +17,7 @@ namespace intend {
 
 static const char* Intend_method_names[] = {
   "/intend.Intend/IntendChat",
+  "/intend.Intend/IntChat",
 };
 
 std::unique_ptr< Intend::Stub> Intend::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -27,32 +28,56 @@ std::unique_ptr< Intend::Stub> Intend::NewStub(const std::shared_ptr< ::grpc::Ch
 
 Intend::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_IntendChat_(Intend_method_names[0], ::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_IntChat_(Intend_method_names[1], ::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
-::grpc::ClientReaderWriter< ::intend::Request, ::intend::Reply>* Intend::Stub::IntendChatRaw(::grpc::ClientContext* context) {
-  return ::grpc::internal::ClientReaderWriterFactory< ::intend::Request, ::intend::Reply>::Create(channel_.get(), rpcmethod_IntendChat_, context);
+::grpc::ClientReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>* Intend::Stub::IntendChatRaw(::grpc::ClientContext* context) {
+  return ::grpc::internal::ClientReaderWriterFactory< ::intend::IntendRequest, ::intend::IntendReply>::Create(channel_.get(), rpcmethod_IntendChat_, context);
 }
 
-::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>* Intend::Stub::AsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::intend::Request, ::intend::Reply>::Create(channel_.get(), cq, rpcmethod_IntendChat_, context, true, tag);
+::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>* Intend::Stub::AsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::intend::IntendRequest, ::intend::IntendReply>::Create(channel_.get(), cq, rpcmethod_IntendChat_, context, true, tag);
 }
 
-::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>* Intend::Stub::PrepareAsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::intend::Request, ::intend::Reply>::Create(channel_.get(), cq, rpcmethod_IntendChat_, context, false, nullptr);
+::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>* Intend::Stub::PrepareAsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::intend::IntendRequest, ::intend::IntendReply>::Create(channel_.get(), cq, rpcmethod_IntendChat_, context, false, nullptr);
+}
+
+::grpc::ClientReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>* Intend::Stub::IntChatRaw(::grpc::ClientContext* context) {
+  return ::grpc::internal::ClientReaderWriterFactory< ::intend::RealtimeInfo, ::intend::PolicyInfo>::Create(channel_.get(), rpcmethod_IntChat_, context);
+}
+
+::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>* Intend::Stub::AsyncIntChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::intend::RealtimeInfo, ::intend::PolicyInfo>::Create(channel_.get(), cq, rpcmethod_IntChat_, context, true, tag);
+}
+
+::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>* Intend::Stub::PrepareAsyncIntChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::intend::RealtimeInfo, ::intend::PolicyInfo>::Create(channel_.get(), cq, rpcmethod_IntChat_, context, false, nullptr);
 }
 
 Intend::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Intend_method_names[0],
       ::grpc::internal::RpcMethod::BIDI_STREAMING,
-      new ::grpc::internal::BidiStreamingHandler< Intend::Service, ::intend::Request, ::intend::Reply>(
+      new ::grpc::internal::BidiStreamingHandler< Intend::Service, ::intend::IntendRequest, ::intend::IntendReply>(
           std::mem_fn(&Intend::Service::IntendChat), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Intend_method_names[1],
+      ::grpc::internal::RpcMethod::BIDI_STREAMING,
+      new ::grpc::internal::BidiStreamingHandler< Intend::Service, ::intend::RealtimeInfo, ::intend::PolicyInfo>(
+          std::mem_fn(&Intend::Service::IntChat), this)));
 }
 
 Intend::Service::~Service() {
 }
 
-::grpc::Status Intend::Service::IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::Reply, ::intend::Request>* stream) {
+::grpc::Status Intend::Service::IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::IntendReply, ::intend::IntendRequest>* stream) {
+  (void) context;
+  (void) stream;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Intend::Service::IntChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::PolicyInfo, ::intend::RealtimeInfo>* stream) {
   (void) context;
   (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");

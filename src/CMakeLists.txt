@@ -116,7 +116,7 @@ include_directories("${hw_proto_dir}/../")
 
 # Targets greeter_[async_](client|server)
 foreach(_target
-  intend_client intend_server)
+  intend_client intend_server int_client)
   add_executable(${_target} "${ibn_grpc_src_dir}/${_target}.cpp"
     ${hw_proto_srcs}
     ${hw_grpc_srcs}

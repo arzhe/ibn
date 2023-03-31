@@ -3,13 +3,23 @@ syntax = "proto3";
 package intend;
 
 service Intend {
-    rpc IntendChat(stream Request) returns (stream Reply) {}
+    rpc IntendChat(stream IntendRequest) returns (stream IntendReply) {}
+
+    rpc IntChat(stream RealtimeInfo) returns (stream Active) {}
 }
 
-message Request {
-    string req = 1;
+message IntendRequest {
+    string request = 1;
 }
 
-message Reply {
-    string rep = 1;
+message IntendReply {
+    string reply = 1;
+}
+
+message RealtimeInfo {
+    string rtinfo = 1;
+}
+
+message Active {
+    bool sleep = 1;
 }

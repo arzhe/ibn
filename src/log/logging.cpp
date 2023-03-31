@@ -36,6 +36,7 @@ const char* strerror_tl(int savedErrno) {
     return strerror_r(savedErrno, t_errnobuf, sizeof t_errnobuf);
 }
 
+// Can be configured in the CMakeLists.txt.
 Logger::LogLevel InitLogLevel() {
     auto option = Logger::INFO;
 #ifdef IBN_LOG_TRACE
@@ -164,6 +165,8 @@ Logger::~Logger() {
     impl_.Finish();
     const LogStream::Buffer& buf(Stream().GetBuffer());
     g_output(buf.Data(), buf.Length());
+    // FIXME: delete?
+    g_flush(); /* Show log-msg once logged.*/
     if(impl_.level_ == FATAL) {
         g_flush();
         abort();

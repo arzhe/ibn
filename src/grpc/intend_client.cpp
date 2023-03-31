@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <chrono>
 
 #include <grpc/grpc.h>
 #include <grpcpp/channel.h>
@@ -13,12 +14,16 @@
 #include "proto/intend.grpc.pb.h"
 #include "base/util/util.h"
 
+#include "indicators/indeterminate_progress_bar.hpp"
+#include "indicators/cursor_control.hpp"
+#include "indicators/termcolor.hpp"
+
 using grpc::Channel;
 using grpc::ClientContext;
 using grpc::ClientReaderWriter;
 using grpc::Status;
-using intend::Request;
-using intend::Reply;
+using intend::IntendRequest;
+using intend::IntendReply;
 using intend::Intend;
 
 class IntendClient {
@@ -27,7 +32,7 @@ public:
 
     void IntendChat() {
         ClientContext context;
-        std::shared_ptr<ClientReaderWriter<Request, Reply>> stream(stub_->IntendChat(&context));
+        std::shared_ptr<ClientReaderWriter<IntendRequest, IntendReply>> stream(stub_->IntendChat(&context));
 
         std::cout << ibn::ColorString<GREEN>("<IBN>") << "Hello and welcome to IBN!" << std::endl;
         std::cout << ibn::ColorString<BLUE>("<IBN>") << "Please tell me which domain you want to access." << std::endl;
@@ -52,17 +57,54 @@ public:
         /*     } */
         /* }); */
 
-        Reply reply;
+        IntendReply reply;
+        IntendRequest request;
         do {
-            if(reply.rep() != "") {
-                std::cout << reply.rep() << std::endl;
+            if(reply.reply() != "" && reply.reply() != "indicators") {
+                std::cout << reply.reply() << std::endl;
             }
+            /* else if(reply.reply() == "indicators") { */
+            /*     indicators::IndeterminateProgressBar bar{ */
+            /*         indicators::option::BarWidth{40}, */
+            /*         indicators::option::Start{"["}, */
+            /*         indicators::option::Fill{"·"}, */
+            /*         indicators::option::Lead{"<=>"}, */
+            /*         indicators::option::End{"]"}, */
+            /*         indicators::option::PostfixText{"Updates IBN-Net Policy"}, */
+            /*         indicators::option::ForegroundColor{indicators::Color::Yellow}, */
+            /*         indicators::option::FontStyles{ */
+            /*             std::vector<indicators::FontStyle>{indicators::FontStyle::Bold}} */
+            /*     }; */
+
+            /*     indicators::ShowConsoleCursor(false); */
+
+            /*     auto job = [&bar]() { */
+            /*     std::this_thread::sleep_for(std::chrono::milliseconds(10000)); */
+            /*     bar.MarkAsCompleted(); */
+            /*     std::cout << termcolor::Bold << termcolor::Green */ 
+            /*         << "System is up to date!\n" << termcolor::Reset; */
+            /*     }; */
+            /*     std::thread job_completion_thread(job); */
+
+            /*     // Update bar state */
+            /*     while (!bar.IsCompleted()) { */
+            /*     bar.Tick(); */
+            /*     std::this_thread::sleep_for(std::chrono::milliseconds(100)); */
+            /*     } */
+
+            /*     job_completion_thread.join(); */
+
+            /*     indicators::ShowConsoleCursor(true); */
+            /*     request.set_request("OK"); */
+            /*     stream->Write(request); */
+            /*     continue; */
+            /* } */
+            
             std::cout << ibn::ColorString<GREEN>("<User>");
             // std::cout << "\033[32mUser>\033[0m";
             std::string cmd;
-            Request request;
             if(std::getline(std::cin, cmd, '\n')) {
-                request.set_req(cmd);
+                request.set_request(cmd);
             }
             if(!stream->Write(request)) {
                 continue;
@@ -98,8 +140,15 @@ private:
 
 int main(int argc, char** argv) {
     std::string server_address;
-    if(argc != 1) {
-        server_address = argv[1];
+    std::string address, port;
+    if(argc == 3) {
+        address = argv[1];
+        port = argv[2];
+        server_address = address + ":" + port;
+    }
+    else if(argc == 2) {
+        address = argv[1];
+        server_address = address + ":8888";
     }
     else {
         server_address = "localhost:8888";

@@ -1,0 +1,10 @@
+20230206 15:38:50.778180Z 14695 INFO  This is log : 0 - logfile_test.cpp:28
+20230206 15:38:51.779029Z 14695 INFO  This is log : 1 - logfile_test.cpp:28
+20230206 15:38:52.780245Z 14695 INFO  This is log : 2 - logfile_test.cpp:28
+20230206 15:38:53.786177Z 14695 INFO  This is log : 3 - logfile_test.cpp:28
+20230206 15:38:54.786511Z 14695 INFO  This is log : 4 - logfile_test.cpp:28
+20230206 15:38:55.786701Z 14695 INFO  This is log : 5 - logfile_test.cpp:28
+20230206 15:38:56.787989Z 14695 INFO  This is log : 6 - logfile_test.cpp:28
+20230206 15:38:57.789015Z 14695 INFO  This is log : 7 - logfile_test.cpp:28
+20230206 15:38:58.790924Z 14695 INFO  This is log : 8 - logfile_test.cpp:28
+20230206 15:38:59.791140Z 14695 INFO  This is log : 9 - logfile_test.cpp:28

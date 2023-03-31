@@ -2,13 +2,15 @@ cmake_minimum_required(VERSION 2.8)
 
 project(intend C CXX)
 
+enable_testing()
+
 option(IBN_LOG_TRACE "trace log" ON)
 if(IBN_LOG_TRACE)
     add_definitions(-DIBN_LOG_TRACE)
 endif(IBN_LOG_TRACE)
 
 if(NOT MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fpermissive -pthread")
 else()
     add_definitions(-D_WIN32_WINNT=0x600)
 endif()
@@ -36,3 +38,4 @@ set(_GRPC_GRPCPP_UNSECURE gRPC::grpc++_unsecure)
 set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src ${CMAKE_CURRENT_BINARY_DIR}/ibn)
+add_subdirectory(${CMAKE_SOURCE_DIR}/test ${CMAKE_CURRENT_BINARY_DIR}/test)

@@ -1,0 +1,13 @@
+/home/gz/repository/workplace/ibn/build/CMakeFiles/rebuild_cache.dir
+/home/gz/repository/workplace/ibn/build/CMakeFiles/edit_cache.dir
+/home/gz/repository/workplace/ibn/build/CMakeFiles/test.dir
+/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/rebuild_cache.dir
+/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/edit_cache.dir
+/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/test.dir
+/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/int_client.dir
+/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/intend_server.dir
+/home/gz/repository/workplace/ibn/build/ibn/CMakeFiles/intend_client.dir
+/home/gz/repository/workplace/ibn/build/test/CMakeFiles/edit_cache.dir
+/home/gz/repository/workplace/ibn/build/test/CMakeFiles/test.dir
+/home/gz/repository/workplace/ibn/build/test/CMakeFiles/rebuild_cache.dir
+/home/gz/repository/workplace/ibn/build/test/CMakeFiles/logfile_test.dir

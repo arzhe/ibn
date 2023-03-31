@@ -33,39 +33,64 @@ class Intend final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::intend::Request, ::intend::Reply>> IntendChat(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::intend::Request, ::intend::Reply>>(IntendChatRaw(context));
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>> IntendChat(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>>(IntendChatRaw(context));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::Request, ::intend::Reply>> AsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::Request, ::intend::Reply>>(AsyncIntendChatRaw(context, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>> AsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>>(AsyncIntendChatRaw(context, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::Request, ::intend::Reply>> PrepareAsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::Request, ::intend::Reply>>(PrepareAsyncIntendChatRaw(context, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>> PrepareAsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>>(PrepareAsyncIntendChatRaw(context, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>> IntChat(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>>(IntChatRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>> AsyncIntChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>>(AsyncIntChatRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>> PrepareAsyncIntChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>>(PrepareAsyncIntChatRaw(context, cq));
     }
   private:
-    virtual ::grpc::ClientReaderWriterInterface< ::intend::Request, ::intend::Reply>* IntendChatRaw(::grpc::ClientContext* context) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::intend::Request, ::intend::Reply>* AsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::intend::Request, ::intend::Reply>* PrepareAsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>* IntendChatRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>* AsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::intend::IntendRequest, ::intend::IntendReply>* PrepareAsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>* IntChatRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>* AsyncIntChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::intend::RealtimeInfo, ::intend::PolicyInfo>* PrepareAsyncIntChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    std::unique_ptr< ::grpc::ClientReaderWriter< ::intend::Request, ::intend::Reply>> IntendChat(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriter< ::intend::Request, ::intend::Reply>>(IntendChatRaw(context));
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>> IntendChat(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>>(IntendChatRaw(context));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>> AsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>>(AsyncIntendChatRaw(context, cq, tag));
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>> AsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>>(AsyncIntendChatRaw(context, cq, tag));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>> PrepareAsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>>(PrepareAsyncIntendChatRaw(context, cq));
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>> PrepareAsyncIntendChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>>(PrepareAsyncIntendChatRaw(context, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>> IntChat(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>>(IntChatRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>> AsyncIntChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>>(AsyncIntChatRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>> PrepareAsyncIntChat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>>(PrepareAsyncIntChatRaw(context, cq));
     }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    ::grpc::ClientReaderWriter< ::intend::Request, ::intend::Reply>* IntendChatRaw(::grpc::ClientContext* context) override;
-    ::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>* AsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncReaderWriter< ::intend::Request, ::intend::Reply>* PrepareAsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>* IntendChatRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>* AsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::intend::IntendRequest, ::intend::IntendReply>* PrepareAsyncIntendChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>* IntChatRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>* AsyncIntChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::intend::RealtimeInfo, ::intend::PolicyInfo>* PrepareAsyncIntChatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_IntendChat_;
+    const ::grpc::internal::RpcMethod rpcmethod_IntChat_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -73,7 +98,8 @@ class Intend final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::Reply, ::intend::Request>* stream);
+    virtual ::grpc::Status IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::IntendReply, ::intend::IntendRequest>* stream);
+    virtual ::grpc::Status IntChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::PolicyInfo, ::intend::RealtimeInfo>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_IntendChat : public BaseClass {
@@ -87,15 +113,35 @@ class Intend final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::Reply, ::intend::Request>* stream) final override {
+    ::grpc::Status IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::IntendReply, ::intend::IntendRequest>* stream) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestIntendChat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::intend::Reply, ::intend::Request>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestIntendChat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::intend::IntendReply, ::intend::IntendRequest>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncBidiStreaming(0, context, stream, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_IntendChat<Service > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_IntChat : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_IntChat() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_IntChat() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status IntChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::PolicyInfo, ::intend::RealtimeInfo>* stream) final override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestIntChat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::intend::PolicyInfo, ::intend::RealtimeInfo>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_IntendChat<WithAsyncMethod_IntChat<Service > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_IntendChat : public BaseClass {
    private:
@@ -108,7 +154,24 @@ class Intend final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::Reply, ::intend::Request>* stream) final override {
+    ::grpc::Status IntendChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::IntendReply, ::intend::IntendRequest>* stream) final override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_IntChat : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_IntChat() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_IntChat() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status IntChat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::intend::PolicyInfo, ::intend::RealtimeInfo>* stream) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }

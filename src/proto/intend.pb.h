@@ -38,7 +38,7 @@ namespace protobuf_intend_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[2];
+  static const ::google::protobuf::internal::ParseTable schema[4];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -46,41 +46,49 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_intend_2eproto
 namespace intend {
-class Reply;
-class ReplyDefaultTypeInternal;
-extern ReplyDefaultTypeInternal _Reply_default_instance_;
-class Request;
-class RequestDefaultTypeInternal;
-extern RequestDefaultTypeInternal _Request_default_instance_;
+class IntendReply;
+class IntendReplyDefaultTypeInternal;
+extern IntendReplyDefaultTypeInternal _IntendReply_default_instance_;
+class IntendRequest;
+class IntendRequestDefaultTypeInternal;
+extern IntendRequestDefaultTypeInternal _IntendRequest_default_instance_;
+class PolicyInfo;
+class PolicyInfoDefaultTypeInternal;
+extern PolicyInfoDefaultTypeInternal _PolicyInfo_default_instance_;
+class RealtimeInfo;
+class RealtimeInfoDefaultTypeInternal;
+extern RealtimeInfoDefaultTypeInternal _RealtimeInfo_default_instance_;
 }  // namespace intend
 namespace google {
 namespace protobuf {
-template<> ::intend::Reply* Arena::CreateMaybeMessage<::intend::Reply>(Arena*);
-template<> ::intend::Request* Arena::CreateMaybeMessage<::intend::Request>(Arena*);
+template<> ::intend::IntendReply* Arena::CreateMaybeMessage<::intend::IntendReply>(Arena*);
+template<> ::intend::IntendRequest* Arena::CreateMaybeMessage<::intend::IntendRequest>(Arena*);
+template<> ::intend::PolicyInfo* Arena::CreateMaybeMessage<::intend::PolicyInfo>(Arena*);
+template<> ::intend::RealtimeInfo* Arena::CreateMaybeMessage<::intend::RealtimeInfo>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace intend {
 
 // ===================================================================
 
-class Request : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:intend.Request) */ {
+class IntendRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:intend.IntendRequest) */ {
  public:
-  Request();
-  virtual ~Request();
+  IntendRequest();
+  virtual ~IntendRequest();
 
-  Request(const Request& from);
+  IntendRequest(const IntendRequest& from);
 
-  inline Request& operator=(const Request& from) {
+  inline IntendRequest& operator=(const IntendRequest& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Request(Request&& from) noexcept
-    : Request() {
+  IntendRequest(IntendRequest&& from) noexcept
+    : IntendRequest() {
     *this = ::std::move(from);
   }
 
-  inline Request& operator=(Request&& from) noexcept {
+  inline IntendRequest& operator=(IntendRequest&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -90,34 +98,34 @@ class Request : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Request& default_instance();
+  static const IntendRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Request* internal_default_instance() {
-    return reinterpret_cast<const Request*>(
-               &_Request_default_instance_);
+  static inline const IntendRequest* internal_default_instance() {
+    return reinterpret_cast<const IntendRequest*>(
+               &_IntendRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  void Swap(Request* other);
-  friend void swap(Request& a, Request& b) {
+  void Swap(IntendRequest* other);
+  friend void swap(IntendRequest& a, IntendRequest& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Request* New() const final {
-    return CreateMaybeMessage<Request>(NULL);
+  inline IntendRequest* New() const final {
+    return CreateMaybeMessage<IntendRequest>(NULL);
   }
 
-  Request* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<Request>(arena);
+  IntendRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<IntendRequest>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const Request& from);
-  void MergeFrom(const Request& from);
+  void CopyFrom(const IntendRequest& from);
+  void MergeFrom(const IntendRequest& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -134,7 +142,7 @@ class Request : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Request* other);
+  void InternalSwap(IntendRequest* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -150,48 +158,48 @@ class Request : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // string req = 1;
-  void clear_req();
-  static const int kReqFieldNumber = 1;
-  const ::std::string& req() const;
-  void set_req(const ::std::string& value);
+  // string request = 1;
+  void clear_request();
+  static const int kRequestFieldNumber = 1;
+  const ::std::string& request() const;
+  void set_request(const ::std::string& value);
   #if LANG_CXX11
-  void set_req(::std::string&& value);
+  void set_request(::std::string&& value);
   #endif
-  void set_req(const char* value);
-  void set_req(const char* value, size_t size);
-  ::std::string* mutable_req();
-  ::std::string* release_req();
-  void set_allocated_req(::std::string* req);
+  void set_request(const char* value);
+  void set_request(const char* value, size_t size);
+  ::std::string* mutable_request();
+  ::std::string* release_request();
+  void set_allocated_request(::std::string* request);
 
-  // @@protoc_insertion_point(class_scope:intend.Request)
+  // @@protoc_insertion_point(class_scope:intend.IntendRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr req_;
+  ::google::protobuf::internal::ArenaStringPtr request_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_intend_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class Reply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:intend.Reply) */ {
+class IntendReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:intend.IntendReply) */ {
  public:
-  Reply();
-  virtual ~Reply();
+  IntendReply();
+  virtual ~IntendReply();
 
-  Reply(const Reply& from);
+  IntendReply(const IntendReply& from);
 
-  inline Reply& operator=(const Reply& from) {
+  inline IntendReply& operator=(const IntendReply& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Reply(Reply&& from) noexcept
-    : Reply() {
+  IntendReply(IntendReply&& from) noexcept
+    : IntendReply() {
     *this = ::std::move(from);
   }
 
-  inline Reply& operator=(Reply&& from) noexcept {
+  inline IntendReply& operator=(IntendReply&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -201,34 +209,34 @@ class Reply : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Reply& default_instance();
+  static const IntendReply& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Reply* internal_default_instance() {
-    return reinterpret_cast<const Reply*>(
-               &_Reply_default_instance_);
+  static inline const IntendReply* internal_default_instance() {
+    return reinterpret_cast<const IntendReply*>(
+               &_IntendReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  void Swap(Reply* other);
-  friend void swap(Reply& a, Reply& b) {
+  void Swap(IntendReply* other);
+  friend void swap(IntendReply& a, IntendReply& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Reply* New() const final {
-    return CreateMaybeMessage<Reply>(NULL);
+  inline IntendReply* New() const final {
+    return CreateMaybeMessage<IntendReply>(NULL);
   }
 
-  Reply* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<Reply>(arena);
+  IntendReply* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<IntendReply>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const Reply& from);
-  void MergeFrom(const Reply& from);
+  void CopyFrom(const IntendReply& from);
+  void MergeFrom(const IntendReply& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -245,7 +253,7 @@ class Reply : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Reply* other);
+  void InternalSwap(IntendReply* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -261,25 +269,247 @@ class Reply : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
   // accessors -------------------------------------------------------
 
-  // string rep = 1;
-  void clear_rep();
-  static const int kRepFieldNumber = 1;
-  const ::std::string& rep() const;
-  void set_rep(const ::std::string& value);
+  // string reply = 1;
+  void clear_reply();
+  static const int kReplyFieldNumber = 1;
+  const ::std::string& reply() const;
+  void set_reply(const ::std::string& value);
   #if LANG_CXX11
-  void set_rep(::std::string&& value);
+  void set_reply(::std::string&& value);
   #endif
-  void set_rep(const char* value);
-  void set_rep(const char* value, size_t size);
-  ::std::string* mutable_rep();
-  ::std::string* release_rep();
-  void set_allocated_rep(::std::string* rep);
+  void set_reply(const char* value);
+  void set_reply(const char* value, size_t size);
+  ::std::string* mutable_reply();
+  ::std::string* release_reply();
+  void set_allocated_reply(::std::string* reply);
 
-  // @@protoc_insertion_point(class_scope:intend.Reply)
+  // @@protoc_insertion_point(class_scope:intend.IntendReply)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr rep_;
+  ::google::protobuf::internal::ArenaStringPtr reply_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_intend_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class RealtimeInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:intend.RealtimeInfo) */ {
+ public:
+  RealtimeInfo();
+  virtual ~RealtimeInfo();
+
+  RealtimeInfo(const RealtimeInfo& from);
+
+  inline RealtimeInfo& operator=(const RealtimeInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  RealtimeInfo(RealtimeInfo&& from) noexcept
+    : RealtimeInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline RealtimeInfo& operator=(RealtimeInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RealtimeInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RealtimeInfo* internal_default_instance() {
+    return reinterpret_cast<const RealtimeInfo*>(
+               &_RealtimeInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(RealtimeInfo* other);
+  friend void swap(RealtimeInfo& a, RealtimeInfo& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RealtimeInfo* New() const final {
+    return CreateMaybeMessage<RealtimeInfo>(NULL);
+  }
+
+  RealtimeInfo* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<RealtimeInfo>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const RealtimeInfo& from);
+  void MergeFrom(const RealtimeInfo& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RealtimeInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string rtinfo = 1;
+  void clear_rtinfo();
+  static const int kRtinfoFieldNumber = 1;
+  const ::std::string& rtinfo() const;
+  void set_rtinfo(const ::std::string& value);
+  #if LANG_CXX11
+  void set_rtinfo(::std::string&& value);
+  #endif
+  void set_rtinfo(const char* value);
+  void set_rtinfo(const char* value, size_t size);
+  ::std::string* mutable_rtinfo();
+  ::std::string* release_rtinfo();
+  void set_allocated_rtinfo(::std::string* rtinfo);
+
+  // @@protoc_insertion_point(class_scope:intend.RealtimeInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr rtinfo_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_intend_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class PolicyInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:intend.PolicyInfo) */ {
+ public:
+  PolicyInfo();
+  virtual ~PolicyInfo();
+
+  PolicyInfo(const PolicyInfo& from);
+
+  inline PolicyInfo& operator=(const PolicyInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  PolicyInfo(PolicyInfo&& from) noexcept
+    : PolicyInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline PolicyInfo& operator=(PolicyInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PolicyInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PolicyInfo* internal_default_instance() {
+    return reinterpret_cast<const PolicyInfo*>(
+               &_PolicyInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  void Swap(PolicyInfo* other);
+  friend void swap(PolicyInfo& a, PolicyInfo& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PolicyInfo* New() const final {
+    return CreateMaybeMessage<PolicyInfo>(NULL);
+  }
+
+  PolicyInfo* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<PolicyInfo>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const PolicyInfo& from);
+  void MergeFrom(const PolicyInfo& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PolicyInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string pinfo = 1;
+  void clear_pinfo();
+  static const int kPinfoFieldNumber = 1;
+  const ::std::string& pinfo() const;
+  void set_pinfo(const ::std::string& value);
+  #if LANG_CXX11
+  void set_pinfo(::std::string&& value);
+  #endif
+  void set_pinfo(const char* value);
+  void set_pinfo(const char* value, size_t size);
+  ::std::string* mutable_pinfo();
+  ::std::string* release_pinfo();
+  void set_allocated_pinfo(::std::string* pinfo);
+
+  // @@protoc_insertion_point(class_scope:intend.PolicyInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr pinfo_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_intend_2eproto::TableStruct;
 };
@@ -292,121 +522,239 @@ class Reply : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// Request
+// IntendRequest
 
-// string req = 1;
-inline void Request::clear_req() {
-  req_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string request = 1;
+inline void IntendRequest::clear_request() {
+  request_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Request::req() const {
-  // @@protoc_insertion_point(field_get:intend.Request.req)
-  return req_.GetNoArena();
+inline const ::std::string& IntendRequest::request() const {
+  // @@protoc_insertion_point(field_get:intend.IntendRequest.request)
+  return request_.GetNoArena();
 }
-inline void Request::set_req(const ::std::string& value) {
+inline void IntendRequest::set_request(const ::std::string& value) {
   
-  req_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:intend.Request.req)
+  request_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:intend.IntendRequest.request)
 }
 #if LANG_CXX11
-inline void Request::set_req(::std::string&& value) {
+inline void IntendRequest::set_request(::std::string&& value) {
   
-  req_.SetNoArena(
+  request_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:intend.Request.req)
+  // @@protoc_insertion_point(field_set_rvalue:intend.IntendRequest.request)
 }
 #endif
-inline void Request::set_req(const char* value) {
+inline void IntendRequest::set_request(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  req_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:intend.Request.req)
+  request_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:intend.IntendRequest.request)
 }
-inline void Request::set_req(const char* value, size_t size) {
+inline void IntendRequest::set_request(const char* value, size_t size) {
   
-  req_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  request_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:intend.Request.req)
+  // @@protoc_insertion_point(field_set_pointer:intend.IntendRequest.request)
 }
-inline ::std::string* Request::mutable_req() {
+inline ::std::string* IntendRequest::mutable_request() {
   
-  // @@protoc_insertion_point(field_mutable:intend.Request.req)
-  return req_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:intend.IntendRequest.request)
+  return request_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Request::release_req() {
-  // @@protoc_insertion_point(field_release:intend.Request.req)
+inline ::std::string* IntendRequest::release_request() {
+  // @@protoc_insertion_point(field_release:intend.IntendRequest.request)
   
-  return req_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return request_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Request::set_allocated_req(::std::string* req) {
-  if (req != NULL) {
+inline void IntendRequest::set_allocated_request(::std::string* request) {
+  if (request != NULL) {
     
   } else {
     
   }
-  req_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), req);
-  // @@protoc_insertion_point(field_set_allocated:intend.Request.req)
+  request_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), request);
+  // @@protoc_insertion_point(field_set_allocated:intend.IntendRequest.request)
 }
 
 // -------------------------------------------------------------------
 
-// Reply
+// IntendReply
 
-// string rep = 1;
-inline void Reply::clear_rep() {
-  rep_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string reply = 1;
+inline void IntendReply::clear_reply() {
+  reply_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Reply::rep() const {
-  // @@protoc_insertion_point(field_get:intend.Reply.rep)
-  return rep_.GetNoArena();
+inline const ::std::string& IntendReply::reply() const {
+  // @@protoc_insertion_point(field_get:intend.IntendReply.reply)
+  return reply_.GetNoArena();
 }
-inline void Reply::set_rep(const ::std::string& value) {
+inline void IntendReply::set_reply(const ::std::string& value) {
   
-  rep_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:intend.Reply.rep)
+  reply_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:intend.IntendReply.reply)
 }
 #if LANG_CXX11
-inline void Reply::set_rep(::std::string&& value) {
+inline void IntendReply::set_reply(::std::string&& value) {
   
-  rep_.SetNoArena(
+  reply_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:intend.Reply.rep)
+  // @@protoc_insertion_point(field_set_rvalue:intend.IntendReply.reply)
 }
 #endif
-inline void Reply::set_rep(const char* value) {
+inline void IntendReply::set_reply(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  rep_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:intend.Reply.rep)
+  reply_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:intend.IntendReply.reply)
 }
-inline void Reply::set_rep(const char* value, size_t size) {
+inline void IntendReply::set_reply(const char* value, size_t size) {
   
-  rep_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  reply_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:intend.Reply.rep)
+  // @@protoc_insertion_point(field_set_pointer:intend.IntendReply.reply)
 }
-inline ::std::string* Reply::mutable_rep() {
+inline ::std::string* IntendReply::mutable_reply() {
   
-  // @@protoc_insertion_point(field_mutable:intend.Reply.rep)
-  return rep_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:intend.IntendReply.reply)
+  return reply_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Reply::release_rep() {
-  // @@protoc_insertion_point(field_release:intend.Reply.rep)
+inline ::std::string* IntendReply::release_reply() {
+  // @@protoc_insertion_point(field_release:intend.IntendReply.reply)
   
-  return rep_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return reply_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Reply::set_allocated_rep(::std::string* rep) {
-  if (rep != NULL) {
+inline void IntendReply::set_allocated_reply(::std::string* reply) {
+  if (reply != NULL) {
     
   } else {
     
   }
-  rep_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), rep);
-  // @@protoc_insertion_point(field_set_allocated:intend.Reply.rep)
+  reply_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), reply);
+  // @@protoc_insertion_point(field_set_allocated:intend.IntendReply.reply)
+}
+
+// -------------------------------------------------------------------
+
+// RealtimeInfo
+
+// string rtinfo = 1;
+inline void RealtimeInfo::clear_rtinfo() {
+  rtinfo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RealtimeInfo::rtinfo() const {
+  // @@protoc_insertion_point(field_get:intend.RealtimeInfo.rtinfo)
+  return rtinfo_.GetNoArena();
+}
+inline void RealtimeInfo::set_rtinfo(const ::std::string& value) {
+  
+  rtinfo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:intend.RealtimeInfo.rtinfo)
+}
+#if LANG_CXX11
+inline void RealtimeInfo::set_rtinfo(::std::string&& value) {
+  
+  rtinfo_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:intend.RealtimeInfo.rtinfo)
+}
+#endif
+inline void RealtimeInfo::set_rtinfo(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  rtinfo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:intend.RealtimeInfo.rtinfo)
+}
+inline void RealtimeInfo::set_rtinfo(const char* value, size_t size) {
+  
+  rtinfo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:intend.RealtimeInfo.rtinfo)
+}
+inline ::std::string* RealtimeInfo::mutable_rtinfo() {
+  
+  // @@protoc_insertion_point(field_mutable:intend.RealtimeInfo.rtinfo)
+  return rtinfo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RealtimeInfo::release_rtinfo() {
+  // @@protoc_insertion_point(field_release:intend.RealtimeInfo.rtinfo)
+  
+  return rtinfo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RealtimeInfo::set_allocated_rtinfo(::std::string* rtinfo) {
+  if (rtinfo != NULL) {
+    
+  } else {
+    
+  }
+  rtinfo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), rtinfo);
+  // @@protoc_insertion_point(field_set_allocated:intend.RealtimeInfo.rtinfo)
+}
+
+// -------------------------------------------------------------------
+
+// PolicyInfo
+
+// string pinfo = 1;
+inline void PolicyInfo::clear_pinfo() {
+  pinfo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PolicyInfo::pinfo() const {
+  // @@protoc_insertion_point(field_get:intend.PolicyInfo.pinfo)
+  return pinfo_.GetNoArena();
+}
+inline void PolicyInfo::set_pinfo(const ::std::string& value) {
+  
+  pinfo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:intend.PolicyInfo.pinfo)
+}
+#if LANG_CXX11
+inline void PolicyInfo::set_pinfo(::std::string&& value) {
+  
+  pinfo_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:intend.PolicyInfo.pinfo)
+}
+#endif
+inline void PolicyInfo::set_pinfo(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  pinfo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:intend.PolicyInfo.pinfo)
+}
+inline void PolicyInfo::set_pinfo(const char* value, size_t size) {
+  
+  pinfo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:intend.PolicyInfo.pinfo)
+}
+inline ::std::string* PolicyInfo::mutable_pinfo() {
+  
+  // @@protoc_insertion_point(field_mutable:intend.PolicyInfo.pinfo)
+  return pinfo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PolicyInfo::release_pinfo() {
+  // @@protoc_insertion_point(field_release:intend.PolicyInfo.pinfo)
+  
+  return pinfo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PolicyInfo::set_allocated_pinfo(::std::string* pinfo) {
+  if (pinfo != NULL) {
+    
+  } else {
+    
+  }
+  pinfo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), pinfo);
+  // @@protoc_insertion_point(field_set_allocated:intend.PolicyInfo.pinfo)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

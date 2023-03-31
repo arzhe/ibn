@@ -9,6 +9,9 @@
 #include <grpcpp/security/server_credentials.h>
 
 #include "parse/fsm.h"
+#include "log/logfile.h"
+#include "log/file_util.h"
+#include "log/logging.h"
 #include "proto/intend.grpc.pb.h"
 
 using grpc::Server;
@@ -16,56 +19,104 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::ServerReaderWriter;
 using grpc::Status;
-using intend::Request;
-using intend::Reply;
+using intend::IntendRequest;
+using intend::IntendReply;
 using intend::Intend;
+using intend::RealtimeInfo;
+using intend::PolicyInfo;
+
+std::unique_ptr<ibn::LogFile> g_log_file;
+
+void OutputFunc(const char* msg, int len) {
+    g_log_file->Append(msg, len);
+}
+
+void FlushFunc() {
+    g_log_file->Flush();
+}
 
 class IntendImpl final : public Intend::Service {
 public:
     Status IntendChat(ServerContext* context,
-                      ServerReaderWriter<Reply, Request>* stream) override {
+                      ServerReaderWriter<IntendReply, IntendRequest>* stream) override {
         (void) context;
-        Request request;
-        Reply reply;
+        IntendRequest request;
+        IntendReply reply;
+        std::string completed = "indicators";
         auto fsm = ibn::Fsm::NewFsmFromFile("../../doc/ibn_policy.json");
-        /* while(1) { */
-        /*     auto content = fsm->GetReply(); */
-        /*     reply.set_rep(content); */
-        /*     stream->Write(reply); */
-            
-        /*     stream->Read(&request); */
-        /*     fsm->Handle(request.req()); */
-        /* } */
         
         while(stream->Read(&request)) {
-            fsm->Handle(request.req());
-
-            auto content = fsm->GetReply();
-            reply.set_rep(content);
+            if(request.request() == "OK") {
+                auto content = fsm->GetReply();
+                reply.set_reply(content);
+            }
+            else {
+                fsm->Handle(request.request());
+                if(fsm->IsCompleted()) {
+                    reply.set_reply(completed);
+                }
+                else {
+                    auto content = fsm->GetReply();
+                    reply.set_reply(content);
+                }
+            }
             stream->Write(reply);
+
+            /* if(data % 2 == 0) { */
+            /*     std::cout << "recv from INT" << std::endl; */
+            /* } */
         }
 
-        /* while(stream->Read(&request)) { */
-        /*     if(!(request.req()).compare("domain")) { */
-        /*         reply.set_rep("\033[32mIBN>\033[0mTell me what do you want the net to do?\n\033[31m[HINT]>\033[0mI want to \033[31m[connect][disconnect]\033[0m from Wuhan \033[31m[to]\033[0m Guangdong."); */
-        /*     } */
-        /*     else if(!(request.req()).compare("connect wuhan to guangdong")) { */
-        /*         reply.set_rep("\033[32mIBN>\033[0mI'm setting these up for you.\n....\n....\nSuccess!\n"); */
-        /*     } */
-        /*     stream->Write(reply); */
-        /* } */
         return Status::OK;
     }
+
+    /* Status IntChat(ServerContext* context, */
+    /*                ServerReaderWriter<PolicyInfo, RealtimeInfo>* stream) override { */
+    /*     (void) context; */
+    /*     RealtimeInfo rt_info; */
+    /*     PolicyInfo p_info; */
+        
+    /*     while(stream->Read(&rt_info)) { */
+    /*         data = stoi(rt_info.rtinfo()); */
+    /*         auto content = rt_info.rtinfo() + " from INT"; */
+    /*         std::cout << content << std::endl; */
+    /*         p_info.set_pinfo(content); */
+    /*         stream->Write(p_info); */
+    /*     } */
+
+    /*     return Status::OK; */
+    /* } */
+
+/* private: */
+/*     int data; */
 };
 
 int main(int argc, char** argv) {
     std::string server_address;
-    if(argc != 1) {
-        server_address = argv[1];
+    std::string address, port;
+    if(argc == 3) {
+        address = argv[1];
+        port = argv[2];
+        server_address = address + ":" + port;
     }
-    else {
+    else if(argc == 2) {
+        address = argv[1];
+        server_address = address + ":8888";
+    }
+    else if(argc == 1) {
         server_address = "0.0.0.0:8888";
     }
+    else {
+        std::cout << "Wrong server_address parameters!";
+        return 0;
+    }
+
+    char name[256] = { '\0' };
+    strncpy(name, argv[0], sizeof name - 1);
+    g_log_file.reset(new ibn::LogFile(::basename(name), 200 * 1000));
+    ibn::Logger::SetOutput(OutputFunc);
+    ibn::Logger::SetFlush(FlushFunc);
+
     IntendImpl service;
     
     ServerBuilder builder;
@@ -77,122 +128,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-/* #include <memory> */
-/* #include <iostream> */
-/* #include <string> */
-/* #include <thread> */
-
-/* #include <grpcpp/grpcpp.h> */
-/* #include <grpc/support/log.h> */
-
-/* #include "parse/fsm.h" */
-/* #include "proto/intend.grpc.pb.h" */
-
-/* using grpc::Server; */
-/* using grpc::ServerAsyncReaderWriter; */
-/* using grpc::ServerBuilder; */
-/* using grpc::ServerContext; */
-/* using grpc::ServerCompletionQueue; */
-/* using grpc::Status; */
-/* using intend::Request; */
-/* using intend::Reply; */
-/* using intend::Intend; */
-
-/* class ServerImpl final { */
-/* public: */
-/*     ~ServerImpl() { */
-/*         server_->Shutdown(); */
-/*         // Always shutdown the completion queue after the server. */
-/*         cq_->Shutdown(); */
-/*     } */
-
-/*     // There is no shutdown handling in this case. */
-/*     void Run(std::string server_address) { */
-/*         ServerBuilder builder; */
-/*         // Listen on the given address without any authentication mechanism. */
-/*         builder.AddListeningPort(server_address, grpc::InsecureServerCredentials()); */
-/*         // Register "service_" as the instance through which we'll communicate with */
-/*         // clients. In this case it corresponds to an *asynchronous* service. */
-/*         builder.RegisterService(&service_); */
-/*         // Get hold of the completion queue used for the asynchronous communication */
-/*         // with the gRPC runtime. */
-/*         cq_ = builder.AddCompletionQueue(); */
-/*         // Finally assemble the server. */
-/*         server_ = builder.BuildAndStart(); */
-/*         std::cout << "Server listening on " << server_address << std::endl; */
-
-/*         // Proceed to the server's main loop. */
-/*         HandleRpcs(); */
-/*     } */
-
-/* private: */
-/*     class CallData { */
-/*     public: */
-/*         CallData(Intend::AsyncService* service, ServerCompletionQueue* cq) */
-/*             : service_(service), cq_(cq), stream_(&ctx_), status_(CREATE) { */
-/*             fsm_ = ibn::Fsm::NewFsmFromFile("../../doc/ibn_policy.json"); */
-/*             Proceed(); */
-/*         } */
-
-/*         void Proceed() { */
-/*             if(status_ == CREATE) { */
-/*                 status_ = INIT_READ; */
-/*                 service_->RequestIntendChat(&ctx_, &stream_, cq_, cq_, this); */
-/*             } */
-/*             else if(status_ == INIT_READ) { */
-/*                 new CallData(service_, cq_); */
-/*                 stream_.Read(&request_, this); */
-/*                 status_ = WRITE; */
-/*             } */
-/*             else if(status_ == READ) { */
-/*                 stream_.Read(&request_, this); */
-/*                 status_ = WRITE; */
-/*             } */
-/*             else if(status_ == WRITE) { */
-/*                 Reply reply; */
-/*                 auto content = fsm_->GetReply(); */
-/*                 reply.set_rep(content); */
-/*                 fsm_->Handle(request_.req()); */
-
-/*                 status_ = READ; */
-/*             } */
-/*             else { */
-/*                 stream_.Finish(Status::OK, this); */
-/*                 delete this; */
-/*             } */
-/*         } */
-
-/*     private: */
-/*         Intend::AsyncService* service_; */
-/*         ServerCompletionQueue* cq_; */
-/*         ServerContext ctx_; */
-/*         Request request_; */
-/*         ServerAsyncReaderWriter<Reply, Request> stream_; */
-/*         std::shared_ptr<ibn::Fsm> fsm_; */
-
-/*         enum CallStatus { CREATE, INIT_READ, READ, WRITE }; */
-/*         CallStatus status_; */
-/*     }; */
-    
-/*     void HandleRpcs() { */
-/*         new CallData(&service_, cq_.get()); */
-/*         void* tag; */
-/*         bool ok; */
-/*         while(true) { */
-/*             GPR_ASSERT(cq_->Next(&tag, &ok)); */
-/*             GPR_ASSERT(ok); */
-/*             static_cast<CallData*>(tag)->Proceed(); */
-/*         } */
-/*     } */
-
-/*     std::unique_ptr<ServerCompletionQueue> cq_; */
-/*     Intend::AsyncService service_; */
-/*     std::unique_ptr<Server> server_; */
-/* }; */
-
-/* int main(int argc, char** argv) { */
-/*     ServerImpl server; */
-/*     std::string server_address(argv[1]); */
-/*     server.Run(server_address); */
-/* } */

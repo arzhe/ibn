@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+cff0c338889ba9c2ffdb3983b83680fb ../src/proto/intend.pb.cc

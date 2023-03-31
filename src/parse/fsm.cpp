@@ -9,7 +9,8 @@ namespace ibn {
 void FsmState::DomainState(std::shared_ptr<Fsm> fsm) {
     std::string reply;
     std::string intend = fsm->GetIntend();
-    
+    fsm->is_completed_ = false;
+
     if(fsm->pmgr_->HasDomain(intend)) {
         fsm->ChangeState(&FsmState::ServiceState);
         LOG_TRACE << "[Domain] >> [Service]";
@@ -258,6 +259,8 @@ void FsmState::BandwidthState(std::shared_ptr<Fsm> fsm) {
             reply = reply.replace(reply.find("#"), 1, node1);
             reply = reply.replace(reply.find("$"), 1, node2);
             reply = reply.replace(reply.find("%"), 1, intend);
+
+            fsm->is_completed_ = true;
         }
         else {
             fsm->ChangeState(&FsmState::BandwidthRollbackState);
@@ -349,6 +352,10 @@ std::string Fsm::GetSecondNodeFromCache() {
 
 std::string Fsm::GetDiag(Diag diag, const std::string& condition) {
     return dmgr_->GetDiag(diag, condition);
+}
+
+bool Fsm::IsCompleted() {
+    return is_completed_;
 }
 
 int Fsm::count_ = 0;

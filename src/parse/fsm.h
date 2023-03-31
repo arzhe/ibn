@@ -26,7 +26,6 @@ public:
     static void BandwidthRollbackState(std::shared_ptr<Fsm> fsm);
 };
 
-
 using State = void(*)(std::shared_ptr<Fsm>);
 
 class Fsm : public std::enable_shared_from_this<Fsm> {
@@ -57,8 +56,12 @@ public:
     std::string GetSecondNodeFromCache();
 
     std::string GetDiag(Diag diag, const std::string& condition);
+    
+    bool IsCompleted();
 
     std::shared_ptr<PolicyMgr> pmgr_;
+
+    bool is_completed_{false};
 
 private:
     State state_;

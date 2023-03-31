@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++14 -fpermissive -pthread  -rdynamic CMakeFiles/demo.dir/test.cpp.o  -o demo 
